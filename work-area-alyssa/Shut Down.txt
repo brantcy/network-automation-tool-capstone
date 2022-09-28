@@ -1,0 +1,8 @@
+## This script shuts down the computer at 11:02pm
+@echo off
+:a
+If %time%==23:00:00.00 goto :b
+goto a:
+:b
+shutdown.exe /s /f /t 120 /c "This computer is shutting down."
+exit

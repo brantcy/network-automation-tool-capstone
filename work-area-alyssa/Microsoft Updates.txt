@@ -1,0 +1,3 @@
+# This script performs Microsoft Updates
+
+Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot | Out-File “C:$Nodes-$(Get-Date -f yyyy-MM-dd)-MSUpdates.log” -Force

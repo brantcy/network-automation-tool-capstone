@@ -1,0 +1,22 @@
+# This script cleans temporary files from the system
+
+#Stop the “Windows Update” service
+Stop-Service -Name “wuauserv” -Force
+
+#Stop the “Background Intelligent Transfer Service”
+Stop-Service -Name “BITS” -Force
+
+#Create an array with a list of temp locations and store them in the $TempLocations variable
+$TempLocations = @(“C:\Windows\Temp\*”, “%USERPROFILE%\AppData\Local\Temp\*”, “C:\Windows\Prefetch\*”, “C:\Windows\SoftwareDistribution\*”, “C:\Users\*\AppData\Local\Microsoft\Windows\INetCache\Low\IE\*”, “C:\Users\*\AppData\Local\Google\Chrome\User Data\Default\Cache\*”, “C:\Users\*\AppData\Local\Mozilla\Firefox\Profiles\*.default\cache2\entries\*”)
+
+#Delete all files in each folder within $TempLocations and silently continue if there is an error
+Remove-Item $TempLocations -Force -Recurse -ErrorAction SilentlyContinue
+
+#Empty the Recycle Bin
+Clear-RecycleBin -Force -ErrorAction SilentlyContinue
+
+#Start the “Windows Update” service
+Start-Service -Name “wuauserv”
+
+#Start the “Background Intelligent Transfer Service”
+Start-Service -Name “BITS”
