@@ -1,5 +1,0 @@
-# This script assigns a DNS domain for a network adapter 
-
-$wql = 'SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled=True'
-$args = @{ DnsDomain = 'fabrikam.com'}
-Invoke-CimMethod -MethodName SetDNSDomain -Arguments $args -Query $wql
